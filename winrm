@@ -1,10 +1,11 @@
 #! /usr/bin/env python2
-"""Usage: winrm SERVER USER PASSWORD COMMAND
+"""Usage: winrm SERVER PORT USER PASSWORD COMMAND
 
 Run COMMAND on a remote machine that has a running WinRM server.
 
 Arguments:
   SERVER      Host to contact
+  PORT        Host port to contact
   USER        User login
   PASSWORD    User password
   COMMAND     Command to run
@@ -21,6 +22,7 @@ import docopt
 def main():
     arguments = docopt.docopt(__doc__)
     server = arguments['SERVER']
+    port = arguments['PORT']
     user = arguments['USER']
     password = arguments['PASSWORD']
     cmd = arguments['COMMAND']
