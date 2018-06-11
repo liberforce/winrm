@@ -27,7 +27,15 @@ def main():
     password = arguments['PASSWORD']
     cmd = arguments['COMMAND']
 
-    session = winrm.Session(server, auth=(user, password))
+    url = '{server}:{port}'.format(server=server, port=port)
+    transport = {
+        '5985': 'plaintext',
+        '5986': 'ssl',
+    }
+    kwargs = {}
+    kwargs['transport'] = transport.get(port)
+
+    session = winrm.Session(url, auth=(user, password), **kwargs)
     # print cmd
     res = None
     try:
