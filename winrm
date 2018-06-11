@@ -1,0 +1,25 @@
+#! /usr/bin/env python2
+import winrm
+import sys
+
+
+def main():
+    server = sys.argv.pop(0)
+    user = sys.argv.pop(0)
+    password = sys.argv.pop(0)
+    cmd = ' '.join(sys.argv)
+
+    session = winrm.Session(server, auth=(user, password))
+    #print cmd
+    res = None
+    try:
+        res = session.run_cmd(cmd)
+    except Exception as err:
+        print err.message
+    else:
+        sys.stdout.write(res.std_out)
+        sys.stderr.write(res.std_err)
+
+
+if __name__ == '__main__':
+    main()
