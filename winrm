@@ -41,7 +41,7 @@ def main():
     try:
         res = session.run_cmd(cmd)
     except Exception as err:
-        print err.message
+        print(err.message or err.args[1])
     else:
         sys.stdout.write(res.std_out)
         sys.stderr.write(res.std_err)
